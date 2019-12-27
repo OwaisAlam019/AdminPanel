@@ -1187,7 +1187,7 @@ var DashboardComponent = /** @class */ (function () {
         var _this = this;
         this.spinnerService.show();
         this.count.getOutfits_Counts().subscribe(function (res) {
-            console.log(res.outfits.complete);
+            // console.log(res.outfits.complete)
             var data = [];
             data[0] = res.outfits.complete;
             data[1] = res.outfits.incomplete;
@@ -1207,14 +1207,14 @@ var DashboardComponent = /** @class */ (function () {
                 { data: data, label: 'Count', backgroundColor: "rgb(255, 201, 86)", hoverBackgroundColor: "rgb(243, 213, 150)" },
             ];
             _this.show = true;
-            console.log('----', _this.barChartData);
+            // console.log('----', this.barChartData)
             _this.spinnerService.hide();
         });
     };
     DashboardComponent.prototype.CountofRecommendation = function () {
         var _this = this;
         this.count.getRecommendation_Counts().subscribe(function (res) {
-            console.log(res);
+            // console.log(res);
             for (var key in res) {
                 if (res[key].pattern == '' || res[key].pattern == null) {
                     res[key].pattern = "---";
@@ -1418,7 +1418,7 @@ var LandingComponent = /** @class */ (function () {
     };
     LandingComponent.prototype.loginFunction = function () {
         var _this = this;
-        console.log('object', this.userObject);
+        // console.log('object', this.userObject);
         this.authReg.PanelSignIn(this.userObject).subscribe(function (res) {
             // console.log(res)
             if (res.status == '0') {
@@ -1752,7 +1752,7 @@ var ClothesService = /** @class */ (function () {
     }
     ClothesService.prototype.getdetails = function () {
         this.token = this.enc.getItem('accesstoken', true);
-        console.log(this.token);
+        // console.log(this.token)
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token })
         };
@@ -1938,7 +1938,7 @@ var InterceptorService = /** @class */ (function () {
     InterceptorService.prototype.intercept = function (request, next) {
         var _this = this;
         if (!this.enc.getItem('accesstoken', true)) {
-            console.log('With---out------Authorization========>');
+            // console.log('With---out------Authorization========>')
             request = request.clone({
                 setHeaders: {
                     'Access-Control-Allow-Origin': '*',
@@ -1947,7 +1947,7 @@ var InterceptorService = /** @class */ (function () {
             });
         }
         else {
-            console.log('WithAuthorization========>');
+            // console.log('WithAuthorization========>');
             request = request.clone({
                 setHeaders: {
                     'Access-Control-Allow-Origin': '*',
@@ -1958,13 +1958,13 @@ var InterceptorService = /** @class */ (function () {
         }
         return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (event) {
             if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpResponse"]) {
-                console.log('event instance of httpres', event);
+                // console.log('event instance of httpres', event)
                 _this.enc.setItem('viewindex', '0', true);
                 // localStorage.setItem('viewindex', '0');
             }
         }, function (err) {
             if (err instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpErrorResponse"]) {
-                console.log('err instance of errr', err);
+                // console.log('err instance of errr', err)
                 if ((err.status === 401 || err.status === 500) && _this.enc.getItem('viewindex', true)) {
                     _this.showmissing();
                     localStorage.clear();
