@@ -1793,9 +1793,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ConfigService = /** @class */ (function () {
+    // baseURL:any="http://192.168.18.103:8080"
     function ConfigService() {
-        // baseURL:any="https://apis.dressmepro.com";
-        this.baseURL = "http://192.168.18.103:8080";
+        this.baseURL = "https://apis.dressmepro.com";
     }
     ConfigService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
