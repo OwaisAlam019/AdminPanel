@@ -1,0 +1,45 @@
+<div class="color-picker">
+  <div class="summary-info" (click)="toggleColors()">
+      <!-- <div *ngIf="show" class="overlay" style="display: block;
+      width: 670px;
+      height: 437px;
+      background: transparent;
+      position: absolute;
+      z-index: 999;
+      top: 0;">
+      </div> -->
+    <div class="info">
+      <p class="style">{{ heading }}</p>
+      <!-- <p class="style-value">{{ color }}</p> -->
+      <p class="style-value">{{ c }}</p>
+    </div>
+
+    <div class="circle" [ngStyle]="{'background': color}"></div>
+  </div>
+  <div *ngIf="show" class="containers">
+      <!-- <div class="box" style="background: red;"></div> -->
+      <div class="box stack-top"></div>
+      <div *ngIf="show" class="opened">
+          <button (click)="toggleColors()" class="close-button">X</button>
+          <div class="colors">
+            <div (click)="changeColor(paint)" *ngFor="let paint of defaultColors;let i=index" class="circle"
+                 [ngStyle]="{'background': paint}">
+              </div>
+               
+          </div>
+      <!-- 
+          <div class="hex-code">
+            <p>Hex Code</p>
+            <div class="g-input">
+              <input type="text" maxlength="7" [value]="color"
+                     (keyup)="changeColorManual(paintInput.value)"
+                     (keydown.enter)="toggleColors()"
+                     #paintInput/>
+            </div>
+          </div> -->
+          <!-- <button  class="clear">Clear Selection</button> -->
+        </div>
+  </div>
+  <!-- <div *ngIf="show" id="overlay"></div> -->
+ 
+</div>

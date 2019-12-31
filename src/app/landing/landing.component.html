@@ -1,0 +1,70 @@
+<!-- <div id="container">
+  <img src="assets/images/logo.svg" alt="" class="logo">
+​
+  <div class="righter">
+    <img src="assets/images/side.png" alt="" class="suit">
+  </div>
+​
+  <div class="form-wrapper" id="wrapper-login" *ngIf="loginisopen == true">
+      <div class="content-wrapper" id="content-signin">
+          <h1>Welcome</h1>
+          <form class="form-login">
+              <input type="text" ngDefaultControl required name="username"   #username="ngModel"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email"
+              [(ngModel)]="userObject.username" class="input-username" />
+
+              <div [hidden]="username.valid || username.pristine " class="alert alert-danger help-block"><p>{{username.valid}}</p>
+                <div [hidden]="!username.hasError('required')">
+                </div>
+              </div>
+              <input type="password" ngDefaultControl required name="password" #password="ngModel"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required placeholder="Password"
+              [(ngModel)]="userObject.password" class="input-password" />
+              <div [hidden]="password.valid || password.pristine " class="alert alert-danger help-block">
+                <p>{{password.valid}}</p>
+                <div [hidden]="!password.hasError('required')">
+                </div>
+              </div>
+              <button type="submit" [disabled]="!username.valid == true || !password.valid == true  " (click)="loginFunction()" >LOGIN</button>
+             
+          </form>
+      </div>
+  </div>
+</div> -->
+
+<div id="wrapper">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box-container image-portion">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box-container login-portion">
+        <form class="login-wrapper">
+          <div class="text-center mb-4">
+            <!-- <img src="assets/images/logo-icon.svg" alt="logo" class="mb-4" width="72" height="72" />
+            <h3 class="h3 mb-3 font-weight-normal">Dress Me Pro</h3> -->
+            <img _ngcontent-skd-c1="" alt="logo" class="mb-4" src="assets/images/logo.svg" style="width: 250px;">
+          </div>
+          <div class="form-label-group">
+            <input type="email" id="email-input" class="form-control" placeholder="Email Address" ngDefaultControl required name="username" #username="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="userObject.username">
+            <label for="email-input">Email address</label>
+            <div [hidden]="username.valid || username.pristine " class="text-red help-block">
+              <div [hidden]="!username.hasError('required')">
+              </div>
+            </div>
+          </div>
+          <div class="form-label-group mb-4">
+            <input type="password" id="password-input" class="form-control" placeholder="Password" ngDefaultControl required name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" #password="ngModel" [(ngModel)]="userObject.password">
+            <label for="password-input">Password</label>
+            <div [hidden]="password.valid || password.pristine " class="text-red help-block">
+                <div [hidden]="!password.hasError('required')">
+                </div>
+              </div>
+          </div>
+          <button class="btn btn-custom btn-block" [disabled]="!username.valid == true || !password.valid == true" (click)="loginFunction()">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

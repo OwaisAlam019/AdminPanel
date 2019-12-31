@@ -1,0 +1,295 @@
+<div class="jumbotron jumbotron-fluid custom-jumbo">
+  <div class="container">
+    <app-toolbar></app-toolbar>
+
+    <div class="title my-5">
+      <h4 class="display-4 text-white">Welcome, {{name}}</h4>
+    </div>
+
+    <div class="row mb-3 mt-5">
+      <div class="col-md-12">
+        <div class="card w-100 user-card my-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="info w-100 d-flex mt-2">
+                  <span class="icon mr-2">
+                    <img src="assets/images/users.svg" alt="icon" class="img-responsive w-100">
+                  </span>
+                  <span class="content my-1">
+                    <h3 class="card-title my-1">
+                      <span>Users</span>
+                    </h3>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info w-100 d-flex mt-2">
+                  <span class="icon mr-2">
+                    <img src="assets/images/total-user.svg" alt="icon" class="img-responsive w-100">
+                  </span>
+                  <span class="content my-1">
+                    <h6 class="card-subtitle mb-2 text-muted">Total Users</h6>
+                    <h5 class="card-title">{{sum}}</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info w-100 d-flex mt-2">
+                  <span class="icon mr-2">
+                    <img src="assets/images/active-user.svg" alt="icon" class="img-responsive w-100">
+                  </span>
+                  <span class="content my-1">
+                    <h6 class="card-subtitle mb-2 text-muted">Active Users</h6>
+                    <h5 class="card-title">{{active}}</h5>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info w-100 d-flex mt-2">
+                  <span class="icon mr-2">
+                    <img src="assets/images/inactive-user.svg" alt="icon" class="img-responsive w-100">
+                  </span>
+                  <span class="content my-1">
+                    <h6 class="card-subtitle mb-2 text-muted">Inactive Users</h6>
+                    <h5 class="card-title">{{inactive}}</h5>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+
+      <div class="col-md-6 mb-4">
+        <div class="row">
+          <div class="col-md-5">
+            <h4>Closet</h4>
+          </div>
+          <div class="col-md-7">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+              </div>
+              <input type="text" class="form-control" (keyup)='search($event.target.value)' placeholder="Cloth Type"
+                aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+          </div>
+        </div>
+
+        <div class="card w-100 custom-table">
+          <table class="table">
+            <thead class="thead-custom">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cloth Type</th>
+                <th scope="col">Cloth Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of results; let i = index">
+                <th scope="row">{{i}}</th>
+                <td>{{data.clothType}}</td>
+                <td>{{data.count}}</td>
+              </tr>
+              <tr *ngIf="b_Results==true">
+                <td class="text-center" colspan="4">No record Found</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="row">
+          <div class="col-md-5">
+            <h4>Combinations</h4>
+          </div>
+          <div class="col-md-7">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+              </div>
+              <input type="text" class="form-control" (keyup)='searchCom($event.target.value)' placeholder="Name"
+                aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+          </div>
+        </div>
+        <div class="card w-100 custom-table">
+          <ng4-loading-spinner> </ng4-loading-spinner>
+          <table class="table">
+            <thead class="thead-custom">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">Closet</th>
+                <!-- <th scope="col">Type</th> -->
+                <th scope="col">Combinations</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of comresults | paginate: config ">
+                <th scope="row">{{data.id}}</th>
+                <td style="width: 180px">{{data.name}}</td>
+                <td>{{data.closet}}</td>
+                <!-- <td>{{data.combinationType}}</td> -->
+                <td>{{data.combination}}</td>
+              </tr>
+              <tr *ngIf="b_Com==true">
+                <td class="text-center" colspan="4">No record Found</td>
+              </tr>
+            </tbody>
+
+          </table>
+          <pagination-controls class="my-pagination" id="first" (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="true"
+            responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-md-12">
+          <div class="row">
+              <div class="col-md-5">
+                <h4>Patterns</h4>
+              </div>
+              <div class="col-md-7">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                  </div>
+                  <input type="text" class="form-control" (keyup)='searchPattern($event.target.value)' placeholder="Pattern"
+                    aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                </div>
+              </div>
+            </div>
+        <div class="card w-100 custom-table">
+          <ng4-loading-spinner> </ng4-loading-spinner>
+          <table class="table">
+            <thead class="thead-custom">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Suit</th>
+                <th scope="col">Shirt</th>
+                <!-- <th scope="col">Type</th> -->
+                <th scope="col">Tie</th>
+                <th scope="col">Combinations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of comPattern | paginate: config_pattren ">
+                <th scope="row" style="width: 10%">{{data.id}}</th>
+                <td style="width: 20%">{{data.suitType}}</td>
+                <td style="width: 20%">{{data.shirtType}}</td>
+                <!-- <td>{{data.combinationType}}</td> -->
+                <td style="width: 20%">{{data.tieType}}</td>
+                <td style="width: 20%">{{data.Count}}</td>
+              </tr>
+              <tr *ngIf="b_Pattern==true">
+                <td class="text-center" colspan="4">No record Found</td>
+              </tr>
+            </tbody>
+  
+          </table>
+          <pagination-controls class="my-pagination" id="second" (pageChange)=" pageChanged_recom($event)"
+            (pageBoundsCorrection)=" pageChanged_recom($event)" maxSize="9" directionLinks="true" autoHide="true"
+            responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-md-12 mb-4">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Outfits</h4>
+          </div>
+          
+        </div>
+        <div *ngIf="show==true" class="card w-100 custom-table">
+          <div  class="container">
+            <div class="chart-container mb-4">
+              <canvas id="chart" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [legend]="barChartLegend" [colors]="pieChartColors" [chartType]="barChartType">
+    
+              </canvas>
+    
+            </div>
+            <div class="button-container text-center my-3 w-100">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-custom" (click)="pie()">Bar to Pie Chart</button>
+                <button class="btn btn-custom" (click)="line()">Line</button>
+                <button class="btn btn-custom" (click)="doughnut()">doughnut</button>
+                <button class="btn btn-custom" (click)="polar()">Polar Area</button>
+                <button class="btn btn-custom" (click)="radar()">Radar</button>
+              </div>
+            </div>
+            
+           
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4">
+        <div class="col-md-12 mb-4">
+            <div class="row">
+              <div class="col-md-5">
+                <h4>Recommendation</h4>
+              </div>
+              <div class="col-md-7">
+                <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                  </div>
+                  <input type="text" class="form-control" (keyup)='searchRecom($event.target.value)' placeholder="Pattern | Color"
+                    aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                </div>
+              </div>
+            </div>
+    
+            <div class="card w-100 custom-table">
+              <table class="table">
+                <thead class="thead-custom">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cloth Type</th>
+                    <th scope="col">Pattren</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Used In</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of comRecom | paginate: config_recom">
+                    <th scope="row" style="width: 10%">{{data.id}}</th>
+                    <td style="width: 20%">{{data.clothType}}</td>
+                    <td style="width: 20%">{{data.pattren}}</td>
+                    <td style="width: 20%">{{data.color}}</td>
+                    <td style="width: 20%">{{data.used}} Combination</td>
+                  </tr>
+                  <tr *ngIf="b_Recom==true">
+                    <td class="text-center" colspan="4">No record Found</td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls class="my-pagination" id="third" (pageChange)="pageChangedrecom($event)"
+              (pageBoundsCorrection)="pageChangedrecom($event)" maxSize="9" directionLinks="true" autoHide="true"
+              responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+              screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+            </div>
+        </div>
+    </div>
+
+
+  </div> <!-- Container end -->
+
+  
+
+</div> <!-- jumbotron end -->

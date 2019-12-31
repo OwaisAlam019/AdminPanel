@@ -1,0 +1,258 @@
+<div class="jumbotron jumbotron-fluid custom-jumbo">
+  <div class="container">
+    <app-toolbar></app-toolbar>
+    <ng4-loading-spinner></ng4-loading-spinner>
+    <div class="title my-5">
+      <h4 class="display-4 text-white">Cloth Input Panel</h4>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-md-12">
+        <div class="card w-100 user-card my-3">
+          <div class="card-body">
+            <div class="container">
+              <form>
+                <div class="form-row">
+
+                  <!-- Select image Column Start -->
+                  <div class="col-md-4 border-right p-3">
+                    <label for="image">Choose Image</label>
+                    <div class="custom-file">
+                      <input #file type="file" class="custom-file-input" name="file" id="customFile" (change)="preview(file.files)" accept='image/*'>
+                      <label class="custom-file-label" for="customFile" >{{nameitem}}</label>
+                      <!-- <label for="image">Choose Image</label>
+                      <input #file type="file" id="image" accept='image/*' (change)="preview(file.files)" /> -->
+                    </div>
+                    <span style="color:red;" *ngIf="message">{{message}}</span>
+                    <div class="thumbnail p-3">
+                      <img [src]="imgURL" *ngIf="imgURL" alt="" class="img-responsive w-100">
+                    </div>
+                  </div>
+                  <!-- Select image column End -->
+
+                  <div class="col-md-8 p-3">
+                    <div class="form-row">
+
+                      <!-- Form Column 1 Start -->
+                      <div class="col-md-6">
+                        <div class="form-group mb-4">
+                          <label>Item Name:</label>
+                          <input class="form-control" name="clothName" #clothName="ngModel" ngDefaultControl required [(ngModel)]="nameitem" type="text" placeholder="Enter Item Name">
+                          <div [hidden]="clothName.valid || clothName.pristine " >
+                            <div [hidden]="!clothName.hasError('required')">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group mb-4">                
+                          <div class="picker">
+                            <app-color-picker [color]="backgroundColor" [heading]="'Select Primary Color'"
+                            (event)="setColor('background', $event)">
+                            </app-color-picker>
+                          </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                          <label for="inputState">Select Shade:</label>
+                          <select id="inputState1" class="form-control" name="shade" ngDefaultControl #shade="ngModel" required [(ngModel)]="clothObject.shade">
+                            <option value="" hidden selected>Select Shade </option>
+                            <option *ngFor="let s of shades" [value]="s.name">{{s.name}}</option>
+                          </select>
+                          <!-- class="alert alert-danger help-block -->
+                          <div [hidden]="shade.valid || shade.pristine " >
+                            <div [hidden]="!shade.hasError('required')">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                          <label for="inputState">Select Pattern:</label>
+                          <select id="inputState2" class="form-control" name="pattern" ngDefaultControl #pattern="ngModel" required [(ngModel)]="clothObject.pattern" placeholder="Select Pattern">
+                            <option value="" hidden selected>Select Pattern </option>
+                              <option *ngFor="let p of patterns" ngDefaultControl [value]="p.name">{{p.name}}</option>
+                            </select>
+                            <div [hidden]="pattern.valid || pattern.pristine " >
+                              <div [hidden]="!pattern.hasError('required')">
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <!-- Form Column 1 End -->
+
+                      <!-- Form Column 2 Start -->
+                      <div class="col-md-6">
+
+                        <div class="form-group mb-4">
+                          <label for="inputState">Item Type:</label>
+                          <select id="inputState3" class="form-control" name="type" ngDefaultControl #type="ngModel" required [(ngModel)]="clothObject.type" placeholder="Select Cloth Type">
+                            <option value="" hidden selected>Select Cloth Type</option>
+                            <option *ngFor="let c of clothtypes" [value]="c.name">{{c.name}}</option>
+                          </select>
+                          <div [hidden]="type.valid || type.pristine " >
+                            <div [hidden]="!type.hasError('required')">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                          <div class="picker">
+                            <app-color-picker [color]="linkColor" name="secondary" ngDefaultControl required [(ngModel)]="clothObject.patternColor"
+                            [heading]="'Select Secondary Color'" (event)="setColor('link', $event)"></app-color-picker>                          </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                          <label for="inputState">Select Fitting:</label>
+                          <select id="inputState4" class="form-control" name="fitting" ngDefaultControl #fitting="ngModel" required [(ngModel)]="clothObject.fitting" placeholder="Select Fitting">
+                            <option value="" hidden selected>Select Fitting </option>
+                            <option value="Slim Fit">Slim Fit</option>
+                            <option value="Body Fit">Body Fit</option>
+                            <option value="Classic Fit">Classic Fit</option>
+                            <option value="Modern Fit">Modern Fit</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group mb-4">
+                          <label for="inputState">Select Pattern Special:</label>
+                          <select id="inputState5" class="form-control" ngDefaultControl name="patternSpecial" #patternSpecial="ngModel" required
+                          [(ngModel)]="clothObject.patternSpecial">
+                            <option hidden value="" selected>Select Pattern Special </option>
+                            <option *ngFor="let ps of patternspecial" [value]="ps.name">{{ps.name}}</option>
+                          </select>
+                        </div>
+
+                      </div>
+                      <!-- Form Column 2 End -->
+                      
+                      <button type="button" class="btn btn-custom btn-block" (click)="done()" [disabled]="clothName.valid==false || type.valid==false ">Upload</button>
+                      
+                      
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="app" style="margin-top: 1000px">
+
+  
+  
+
+  <div class="logo">
+    <img src="assets/img/dmp-logo.png" alt="">
+  </div>
+
+  <div class="container">
+    <div class="col-12">
+      <div class="col-10">
+        <h1 class="title">Cloth Input Panel</h1>
+      </div>
+      <div class="col-2">
+        <h4 class="user-info">Hi, {{naam}}  <a (click)="logout()" href="#">Logout</a></h4>
+      </div>
+    </div>
+  </div>
+
+
+  
+  
+
+  <div class="container main-content">
+
+    <div class="center">
+
+     
+
+      <div class="sidebar col-6">
+
+        <input class="input-field" #clothName="ngModel" required [(ngModel)]="nameitem" type="text"
+          placeholder="Enter Item Name">
+        <div [hidden]="clothName.valid || clothName.pristine " class="alert alert-danger help-block">
+          <div [hidden]="!clothName.hasError('required')">
+          </div>
+        </div>
+
+
+
+        <select class="select-field" ngDefaultControl #type="ngModel" required [(ngModel)]="clothObject.type">
+          <option value="" disabled selected>Select Cloth Type </option>
+          <option *ngFor="let c of clothtypes" [value]="c.name">{{c.name}}</option>
+        </select>
+        <div [hidden]="type.valid || type.pristine " class="alert alert-danger help-block">
+          <div [hidden]="!type.hasError('required')">
+          </div>
+        </div>
+
+        <div class="picker">
+          <app-color-picker [color]="backgroundColor" [heading]="'Select Primary Color'"
+            (event)="setColor('background', $event)">
+          </app-color-picker>
+        </div>
+
+
+
+        <select class="select-field" ngDefaultControl #shade="ngModel" required [(ngModel)]="clothObject.shade">
+          <option value="" disabled selected>Select Shade </option>
+          <option *ngFor="let s of shades" [value]="s.name">{{s.name}}</option>
+        </select>
+        <div [hidden]="shade.valid || shade.pristine " class="alert alert-danger help-block">
+          <div [hidden]="!shade.hasError('required')">
+          </div>
+        </div>
+
+
+        <select class="select-field" ngDefaultControl #fitting="ngModel" required [(ngModel)]="clothObject.fitting">
+          <option value="" disabled selected>Select Fitting </option>
+          <option value="Slim Fit">Slim Fit</option>
+          <option value="Body Fit">Body Fit</option>
+          <option value="Classic Fit">Classic Fit</option>
+          <option value="Modern Fit">Modern Fit</option>
+        </select>
+
+
+
+        <select class="select-field" ngDefaultControl #pattern="ngModel" required [(ngModel)]="clothObject.pattern">
+          <option value="" disabled selected>Select Pattern </option>
+          <option *ngFor="let p of patterns" ngDefaultControl [value]="p.name">{{p.name}}</option>
+        </select>
+        <div [hidden]="pattern.valid || pattern.pristine " class="alert alert-danger help-block">
+          <div [hidden]="!pattern.hasError('required')">
+          </div>
+        </div>
+
+       
+
+        <div class="picker">
+          <app-color-picker [color]="linkColor" ngDefaultControl required [(ngModel)]="clothObject.patternColor"
+            [heading]="'Select Secondary Color'" (event)="setColor('link', $event)"></app-color-picker>
+        </div>
+
+        <select class="select-field" ngDefaultControl name="patternSpecial" #patternSpecial="ngModel" required
+          [(ngModel)]="clothObject.patternSpecial">
+          <option hidden value="" selected>Select Pattern Special </option>
+          <option *ngFor="let ps of patternspecial" [value]="ps.name">{{ps.name}}</option>
+        </select>
+
+
+
+        <div class="button-submit">
+          <button (click)="done()"
+            [disabled]="clothName.valid==false || type.valid==false || pattern.valid==false || shade.valid==false">Save
+            cloth</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div> -->
+<!-- <router-outlet></router-outlet> -->

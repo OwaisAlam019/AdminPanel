@@ -1,0 +1,63 @@
+.custom-jumbo {
+    padding: 1rem;
+    height: 350px;
+
+    background: url("../../assets/images/Staub_Header.jpg") center center no-repeat;
+    background-size: cover;
+
+    .user-card {
+        box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+        border: none;
+        border-radius: 1em;
+
+        span.icon {
+            width: 20%;
+        }
+
+        span.content {
+            width: 80%;
+        }
+    }
+
+    .custom-table {
+        box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.12);
+        border: none;
+        border-radius: 1em;
+
+        .thead-custom {
+            background: #ffc956;
+            color: #131313;
+        }
+    }
+}
+
+.btn-custom {
+    background: #ffc956;
+    color:black;
+
+    &:hover, &:visited {
+        background: #d49202;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+	.display-4.text-white {
+		font-size: 36px;
+    }
+    
+    .custom-jumbo {
+        height: 450px;
+        
+    }
+}
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #ffc956;
+    color:black;
+    border-radius: 5px;
+  }
+  .my-pagination /deep/ .ngx-pagination a{
+    background:#f3d596;
+    color:black;
+  }
+  
