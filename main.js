@@ -337,7 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: 'clothpanel', component: _clothingpanel_clothingpanel_component__WEBPACK_IMPORTED_MODULE_3__["ClothingpanelComponent"] },
+    { path: 'clothpanel', component: _clothingpanel_clothingpanel_component__WEBPACK_IMPORTED_MODULE_3__["ClothingpanelComponent"], canActivate: [_service_Auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_5__["AuthGuardService"]] },
     { path: 'dashboard', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__["DashboardComponent"], canActivate: [_service_Auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_5__["AuthGuardService"]] },
     { path: 'welcome', component: _landing_landing_component__WEBPACK_IMPORTED_MODULE_4__["LandingComponent"] },
     { path: '404', component: _pagenotfound_pagenotfound_component__WEBPACK_IMPORTED_MODULE_7__["PagenotfoundComponent"] },
