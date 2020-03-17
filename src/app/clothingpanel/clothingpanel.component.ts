@@ -156,9 +156,9 @@ preview(files) {
 
 done() {
   this.spinnerService.show();
-  this.clothObject.colorTag = localStorage.getItem('Ctag');
-  console.log(this.colors.hex);
-  this.clothObject.color = localStorage.getItem('Cname');
+  this.clothObject.colorTag = this.enc.getItem('Ctag',true);
+  // console.log(this.colors.hex);
+  this.clothObject.color = this.enc.getItem('Cname',true);
   this.clothObject.clothImage = this.encoded;
   this.clothObject.clothName = this.nameitem
  this.clothObject.patternColor = this.linkColor;

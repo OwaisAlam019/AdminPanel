@@ -9,8 +9,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   { path: 'clothpanel', component: ClothingpanelComponent, canActivate: [AuthGuardService]},
-  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuardService]  },
-  { path: 'welcome', component: LandingComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
+  { path: 'welcome', component: LandingComponent  },
   { path: '404', component: PagenotfoundComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: '404', pathMatch: 'full' }
