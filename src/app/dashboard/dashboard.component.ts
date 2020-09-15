@@ -6,6 +6,7 @@ import { CryptoService } from '../service/Encryption/crypto.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts'
+import { ClothesService } from '../service/clothing/clothes.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -43,17 +44,35 @@ export class DashboardComponent implements OnInit {
   comData: any = [];
   comPattern: any = [];
   comRecom: any = [];
+  inventory:any = []
   name;
   config: any;
   config_pattren: any;
   config_recom: any;
+  config_inventory_table: any;
   key: any = [];
   b_Results: boolean = false;
   b_Com: boolean = false;
   b_Pattern: boolean = false;
   b_Recom: boolean = false;
-  constructor(private spinnerService: Ng4LoadingSpinnerService, public count: DatacountsService, public enc: CryptoService) {
+  constructor(private spinnerService: Ng4LoadingSpinnerService, public count: DatacountsService, public enc: CryptoService,private clothService:ClothesService) {
 
+  }
+  public getInventory(){
+    console.log("get inventory");
+    
+    this.clothService.getInventory().subscribe((res)=> {
+      console.log(res,"response length");
+      
+     this.inventory = res.data
+
+    })
+    this.config_inventory_table = {
+      id: 'inventory',
+      itemsPerPage: 7,
+      currentPage: 2,
+      totalItems: this.inventory.count
+    };
   }
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
@@ -92,6 +111,7 @@ export class DashboardComponent implements OnInit {
     this.CountofPattrens();
     this.CountofCombination();
     this.CountofRecommendation();
+    this.getInventory()
     this.name = this.enc.getItem("Username", true);
 
   }
@@ -294,6 +314,17 @@ this.spinnerService.hide();
     this.config_recom.currentPage = event;
   }
 
+  pageChangedInventory(event) {
+    this.config_inventory_table.currentPage = event;
+  }
+  disableInventoryItem (itemId) {
+    console.log(itemId,"item id ");
+    this.clothService.disableInventoryItem(itemId).subscribe((res) => {
+      console.log(res,"result");
+      
+    })
+    
+  }
 
 }
 
