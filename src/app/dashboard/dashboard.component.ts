@@ -304,6 +304,29 @@ this.spinnerService.hide();
       }
     }
   }
+  searchInventory(word: string) {
+    if (!word) {
+
+    //   this.comRecom = this.comRecom;
+    // this.comRecom=[];
+    // this.CountofRecommendation();
+    this.getInventory()
+    // this.b_Recom=false;
+      
+
+    } else {
+      this.inventory = this.inventory.filter(x =>
+        x.colorTag.trim().includes(word.trim()// || x.clothType.trim().toLowerCase().includes(word.trim().toLowerCase()) || x.pattren.trim().toLowerCase().includes(word.trim().toLowerCase()
+        )
+
+      );
+      if (this.comRecom.length == 0) {
+        this.b_Recom = true;
+
+
+      }
+    }
+  }
   pageChanged(event) {
     this.config.currentPage = event;
   }
@@ -321,6 +344,7 @@ this.spinnerService.hide();
     console.log(itemId,"item id ");
     this.clothService.disableInventoryItem(itemId).subscribe((res) => {
       console.log(res,"result");
+      this.getInventory()
       
     })
     

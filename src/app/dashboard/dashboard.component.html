@@ -298,7 +298,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
                 </div>
-                <input type="text" class="form-control" (keyup)='searchRecom($event.target.value)' placeholder="Pattern | Color"
+                <input type="text" class="form-control" (keyup)='searchInventory($event.target.value)' placeholder="Color Tag e.g H3"
                   aria-label="Small" aria-describedby="inputGroup-sizing-sm">
               </div>
             </div>
@@ -311,6 +311,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Image</th>
                   <th scope="col">Color tag</th>
+                  <th scope="col">Color</th>
                   <th scope="col">Name</th>
                   <th scope="col">Status</th>
                   <th scope="col">Action</th>
@@ -322,9 +323,10 @@
                   <th scope="row" style="width: 10%">{{data.id}}</th>
                   <td style="width: 20%"> <img [src]= data.imageUrl alt="" height="100px" > </td>
                   <td style="width: 10%">{{data.colorTag}}</td>
+                  <td style="width: 10%" [style.background-color]="data.Color.hex"></td>
                   <td style="width: 20%">{{data.imageDesc.name}}</td>
                   <td style="width: 10%">{{data.active ? 'Active': 'Disabled'}}</td>
-                  <td style="width: 30%">
+                  <td style="width: 20%">
                     <button class="btn btn-custom" (click)="disableInventoryItem(data.id)" >{{data.active ? 'Disable' : 'Enable'  }}</button>
                   </td>
                   <!-- <td style="width: 20%">{{data.used}} Combination</td> -->
