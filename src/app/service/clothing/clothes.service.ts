@@ -38,6 +38,35 @@ export class ClothesService {
 
       ));
   }
+  getInventory():Observable<any>{
+    this.token = this.enc.getItem('accesstoken',true);
+    const httpOptions = {
+      headers : new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token })
+    }
+
+    return this.http.get<any>(this.URL.baseURL + '/cloth/inventory',httpOptions).pipe(
+      map((res)=>{
+        return res
+        
+      })
+    )
+  }
+
+  disableInventoryItem(itemId):Observable<any>{
+    this.token = this.enc.getItem('accesstoken',true);
+    const httpOptions = {
+      headers : new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token })
+    }
+
+    return this.http.post<any>(this.URL.baseURL + '/cloth/disable',{item_id:itemId},httpOptions).pipe(
+      map((res)=>{
+        console.log(res,"inventory disable");
+        
+        return res
+        
+      })
+    )
+  }
   // addsignin(user: any): Observable<any> {
   //   return this.http.post<any>(this.URL.baseURL+'/user/login',user,httpOptions).pipe(
   //       map((res)=>{return res}
